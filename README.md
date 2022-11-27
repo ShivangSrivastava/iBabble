@@ -28,11 +28,19 @@ pip install flask flask-sqlalchemy flask-login flask-wtf wtforms flask-bcrypt fl
 
 Now environment set for run app...
 > Last command to run app
-> URL will open in browser automatically
-> and if connect with lan it will run in all your devices which is connect to that lan
+ URL will open in browser automatically
+ and if connect with lan it will run in all your devices which is connect to that lan
 ```
 python app.py
 ```
+
+### Login Page
+![image](https://user-images.githubusercontent.com/114788987/204134842-0213bfa8-ba71-4dff-a4db-8b640d69c23c.png)
+
+### Signup Page
+
+
+
 
 for feedback/suggestions feel free to contact me at shivangsrivastava157@gmail.com
 

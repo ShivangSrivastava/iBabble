@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp | iBabble</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
+      body {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        justify-content: center;
+        font-family: "Kalam", cursive;
+        font-size: 18px;
+         background: rgb(195, 34, 34);
+        background: linear-gradient(
+          90deg,
+          rgba(195, 34, 34, 1) 0%,
+          rgba(255, 0, 177, 1) 50%,
+          rgba(48, 45, 253, 1) 100%
+        );
+      }
+
+      img {
+        margin-top: 20vh;
+        width: auto;
+        height: 100px;
+      }
+      .container {
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      input {
+        font-size: 15px;
+        font-family: "Kalam", cursive;
+        color: rgb(68, 0, 255);
+        outline: none;
+        border: none;
+        border-radius: 999px;
+        margin: 10px;
+        text-align: center;
+        padding-left: 10px;
+        height: 30px;
+        width: 250px;
+        font-weight: bolder;
+      }
+      #submit {
+        color: white;
+        background-color: red;
+      }
+      .signup-link {
+        margin: auto;
+      }
+      a{
+          color:white
+      }
+      button img{
+          height:25px;
+          margin:0;
+      }
+      button{
+          background-color: transparent;
+          outline: none;
+          border: none;
+      }
+      button:hover{
+        color:blue;
+    }
+    .password input{
+          margin-left: 50px;
+          margin-right: 0px;
+      }
+       @media only screen and (max-width: 375px) {
+        body {
+          font-size: 12px;
+        }
+
+        .password input {
+          margin-left: 12%;
+          margin-right: 0px;
+        }
+        input {
+          width: 40%;
+          font-size: 12px;
+        }
+      }
+    </style>
+    <script>
+        function hideshow(){
+            let type = document.getElementById('password').getAttribute("type");
+            if (type=="password"){
+                 document.getElementById('password').type='text';
+             document.getElementById('hideshow-button').innerHTML='<img src="/static/hide.png" alt="hide">';
+            }
+            else{
+                document.getElementById('password').type='password';
+             document.getElementById('hideshow-button').innerHTML='<img src="/static/show.png" alt="show">';
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="/static/logo.png" alt="logo" />
+    </div>
+    <div class="login-page container">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }} 
+      <div>{{ form.username }}</div>
+      <div>{{ form.name}}</div>
+      <div class="password">{{ form.password }} <button type="button" id='hideshow-button'onclick="hideshow()"><img src="/static/show.png" alt="show"></button></div>
+      <div>{{ form.email }}</div>
+      <div>{{form.otpbox}}</div>
+      {{ form.submit }}
+    </form>
+    {% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         <script>alert('{{ message }}');</script>
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+
+    <a href="{{ url_for('login') }}">Already have an account? Log In</a>
+  </body>
+</html>

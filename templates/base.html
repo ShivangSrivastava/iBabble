@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iBabble</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+
+    <style>
+      body,
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Kalam", cursive;
+        font-size: 18px;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        overflow: hidden;
+        background: rgb(195, 34, 34);
+        background: linear-gradient(
+          5deg,
+          rgba(195, 34, 34, 1) 0%,
+          rgba(255, 0, 177, 1) 50%,
+          rgba(48, 45, 253, 1) 100%
+        );
+      }
+      .navbar li {
+        float: left;
+        list-style: none;
+        margin: 13px 20px;
+      }
+      .navbar ul {
+        overflow: auto;
+        margin: 0;
+      }
+      .navbar li a {
+        padding: 3px 3px;
+        text-decoration: none;
+        color: white;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    {% block script %} {% endblock %}
+    <header>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">iBabble</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>{% block mainBody %} {% endblock %}</section>
+  </body>
+</html>

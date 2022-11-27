@@ -1,0 +1,192 @@
+{% extends 'base.html' %} {% block script %}
+<script>
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function splitWithTail(str, delim, count) {
+    var parts = str.split(delim);
+    var tail = parts.slice(count).join(delim);
+    var result = parts.slice(0, count);
+    result.push(tail);
+    return result;
+  }
+
+  function msgBox(msg) {
+    let color1 = getRandomColor();
+    let color2 = getRandomColor();
+    let width = "fit-content";
+    let align = "left";
+    let float = "left";
+    let user = splitWithTail(msg, "!", 1)[0];
+    let chat = splitWithTail(msg, "!", 1)[1];
+    if (msg.split("!")[1] == "7gh7edyh7@$#^888y4Connected") {
+      width = "100%";
+      chat = `${user} Connected!`;
+      align = "center";
+    }
+    if (`${user}` == `{{user}}`) {
+      float = "right";
+    }
+
+    let htmlCode = `
+      <style>
+        #bubbles:hover{
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        }
+        p:hover{
+          cursor:default;
+        }
+      </style>
+      <div>
+    <div id="bubbles" style="
+          background: ${color1};
+          background: linear-gradient(15deg, ${color2} 50%, rgba(255,255,255,1) 100%);
+          height:auto;
+          margin:5px;
+          width: ${width};
+          text-align:${align};
+          padding:10px;
+          border-radius:999px;
+    ">
+
+  <p style="color:white;font-size:smaller;text-decoration:underline;">@${user}</p>
+  <p style="color:white;">${chat}</p>
+  </div></div>
+    `;
+    return htmlCode;
+  }
+
+  $(document).ready(function () {
+    var socket = io.connect("http://192.168.43.140:8000");
+    socket.on("connect", function () {
+      socket.send("{{user}} 3y738732y73628732679");
+    });
+
+    socket.on("message", function (data) {
+      $("#messages").append($(msgBox(data)));
+    });
+
+    $("#sendBtn").on("click", function () {
+      socket.send($("#username").val() + "!" + $("#message").val());
+      $("#message").val("");
+    });
+    $("#message").keypress(function (event) {
+      if (event.keyCode === 13) {
+        $("#sendBtn").click();
+      }
+    });
+  });
+</script>
+{% endblock %} {% block mainBody %}
+<style>
+  * {
+    font-size: 16px;
+  }
+  .sticky {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  #messageBox {
+    display: flex;
+    border: 1px solid gray;
+    margin: 10px;
+    width: 80%;
+    border-radius: 999px;
+    height: 50px;
+    padding: 0;
+    background-color: white;
+  }
+
+  #message {
+    width: 100%;
+    padding-left: 5%;
+    border: none;
+    margin: 0;
+    outline: none;
+  }
+  #username {
+    width: auto;
+    padding-left: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    border: none;
+    margin: 0;
+    outline: none;
+    text-align: center;
+  }
+  #messageBox {
+    height: auto;
+    padding: 0;
+  }
+  #messageBox button {
+    background-color: transparent;
+    height: 100%;
+    border: none;
+  }
+  #messageBox button span {
+    font-size: 40px;
+    font-weight: lighter;
+    margin-bottom: 0;
+  }
+  #messageBox:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  #messageBox button:hover {
+    cursor: pointer;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .messages {
+    height: auto;
+    width: 80vw;
+    margin-bottom: 20%;
+    margin-top: 10%;
+  }
+  body {
+    background: rgb(226, 0, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(226, 0, 255, 1) 0%,
+      rgba(0, 212, 255, 1) 100%
+    );
+  }
+  @media screen and (max-width: 750px) {
+    * {
+      font-size: 14px;
+    }
+  }
+</style>
+<div class="container">
+  <div id="messages" class="messages"></div>
+</div>
+
+<div class="container">
+  <div class="sticky" id="messageBox">
+    <input
+      type="hidden"
+      id="username"
+      placeholder="Username"
+      value="{{user}}"
+      disabled
+    />
+    <input type="text" id="message" placeholder="Message" autocomplete="off" />
+    <button id="sendBtn">
+      <span class="material-symbols-outlined"> send </span>
+    </button>
+  </div>
+</div>
+{% endblock %}

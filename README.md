@@ -13,7 +13,7 @@ pip install virtualenv
 
 > Creating virtual environment
 ``` 
-virtual venv 
+virtualenv venv 
 ```
 
 > Activate venv

@@ -1,6 +1,5 @@
 # iBabble
-iBabble is a simple chat app.
-Flask(Python) use as backend and HTML, CSS, JS use as frontend.
+iBabble is a user-friendly and easy-to-use chat application that has been built with a combination of Flask, a popular Python web framework, and a front-end stack consisting of HTML, CSS, and JavaScript. The use of Flask as the backend enables the app to handle multiple connections and perform various operations such as authentication and data storage efficiently. Meanwhile, the use of HTML, CSS and JavaScript in the front-end allows the app to have a sleek and visually appealing user interface that is easy to navigate.
 
 ## Make environmet to run...
 

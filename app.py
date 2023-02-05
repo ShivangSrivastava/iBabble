@@ -180,11 +180,23 @@ class SendMail:
         self.sendMail(receiverEmail,msg)
         return otp
 
+
+
+
+def get_ip_address():
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    s.connect(("8.8.8.8", 80))
+
+    return s.getsockname()[0]
+
+
 if __name__ == "__main__":
     #Creating tables
     with app.app_context():
         db.create_all()
-    IPAddress="192.168.43.140"
+    IPAddress=get_ip_address()
     port=8000
     url=f"http://{IPAddress}:{port}"
     print("Running at", url)
